@@ -1,6 +1,11 @@
 import React from 'react'
-import Navbar from './components/layouts/Navbar'
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
 import './App.css'
+import Navbar from './components/layouts/Navbar'
 import Users from './components/users/Users'
 import axios from 'axios'
 import Search from './components/users/Search'
