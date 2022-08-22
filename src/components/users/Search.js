@@ -10,6 +10,7 @@ class Search extends Component {
     searchUsers: PropTypes.func.isRequired,
     clearUsers: PropTypes.func.isRequired,
     showClear: PropTypes.bool.isRequired,
+    setAlert: PropTypes.func.isRequired
   }
 
   //This method is used to dynamically update state when input text changes in the search form
@@ -18,9 +19,12 @@ class Search extends Component {
   //This method is used to submit search form
   onSubmit = (e) => {
     e.preventDefault()
-
-    this.props.searchUsers(this.state.text)
-    this.setState({ text: '' })
+    if (this.state.text === '') {
+      this.props.setAlert('Please enter a username', 'light')
+    } else {
+      this.props.searchUsers(this.state.text)
+      this.setState({ text: '' })
+    }
   }
 
   render() {
