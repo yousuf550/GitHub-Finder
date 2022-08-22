@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class Search extends Component {
   state = {
     text: ''
+  }
+
+  static propTypes = {
+    searchUsers: PropTypes.func.isRequired,
   }
 
   //This method is used to dynamically update state when input text changes in the search form
@@ -11,7 +16,9 @@ class Search extends Component {
   //This method is used to submit search form
   onSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state.text);
+
+    this.props.searchUsers(this.state.text);
+    this.setState({text: ""})
   }
 
   render() {
