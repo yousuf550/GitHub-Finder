@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 
 class User extends Component {
+  
   componentDidMount() {
-    this.props.getUser(this.props.match.login);
+    this.props.getUser(this.props.match.params.login);
   }
 
   render() {
@@ -23,7 +24,7 @@ class User extends Component {
     } = this.props.user;
 
     const { loading } = this.props;
-    return( <div className='container'>{name}</div>);
+    return <div>{name}</div>;
   }
 }
 
