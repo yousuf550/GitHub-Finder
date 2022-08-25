@@ -1,11 +1,11 @@
-import React, { Fragment } from "react";
+import React from "react";
 
 const About = () => {
   return (
-    <Fragment>
+    <div className="container">
       <h1>About Us</h1>
       <p>Purpose of this app to allow users to search GitHub Profiles</p>
-    </Fragment>
+    </div>
   );
 };
 

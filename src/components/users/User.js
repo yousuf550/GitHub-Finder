@@ -12,7 +12,7 @@ class User extends Component {
 
   static propTypes = {
     getUser: PropTypes.func.isRequired,
-    getUserRepos:PropTypes.func.isRequired,
+    getUserRepos: PropTypes.func.isRequired,
     user: PropTypes.object.isRequired,
     repos: PropTypes.array.isRequired,
     loading: PropTypes.bool.isRequired,
@@ -40,7 +40,7 @@ class User extends Component {
     if (loading) return <Spinner />;
 
     return (
-      <Fragment>
+      <div className='container'>
         <Link to='/' className='btn btn-light'>
           Back to Search Results
         </Link>
@@ -84,9 +84,8 @@ class User extends Component {
           <div className='badge badge-light'>Public Repos: {public_repos}</div>
           <div className='badge badge-dark'>Public Gists: {public_gists}</div>
         </div>
-
-        <Repos repos={repos}/>
-      </Fragment>
+        <Repos repos={repos} />
+      </div>
     );
   }
 }
