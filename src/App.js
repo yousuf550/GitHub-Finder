@@ -42,7 +42,6 @@ class App extends React.Component {
       `https://api.github.com/users/${username}?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
     );
     this.setState({ user: res.data, loading: false });
-
   };
 
   // This function is called from the search component to clear users froms state
