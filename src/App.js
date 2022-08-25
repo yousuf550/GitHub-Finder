@@ -12,6 +12,7 @@ import User from "./components/users/User";
 class App extends React.Component {
   state = {
     users: [],
+    repos: [],
     user: {},
     loading: false,
     alert: null,
@@ -44,6 +45,15 @@ class App extends React.Component {
     this.setState({ user: res.data, loading: false });
   };
 
+  // This function is called from User Component to display latest repos from GitHub
+  getUserRepos = async (username) => {
+    this.setState({ loading: true });
+    const res = await axios.get(
+      `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+    );
+    this.setState({ repos: res.data, loading: false });
+  };
+
   // This function is called from the search component to clear users froms state
   clearUsers = () => this.setState({ users: [], loading: false });
 
@@ -55,7 +65,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { users, loading, user } = this.state;
+    const { users, loading, user, repos } = this.state;
 
     return (
       <Router>
@@ -94,6 +104,8 @@ class App extends React.Component {
                     getUser={this.getUser}
                     user={user}
                     loading={loading}
+                    getUserRepos={this.getUserRepos}
+                    repos={repos}
                   />
                 )}
               />
