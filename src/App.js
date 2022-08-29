@@ -8,6 +8,7 @@ import Search from "./components/users/Search";
 import Alert from "./components/layouts/Alert";
 import About from "./components/pages/About";
 import User from "./components/users/User";
+import GithubState from "./context/github/GithubState";
 
 const App = () => {
   const [users, setUsers] = useState([]);
@@ -70,60 +71,62 @@ const App = () => {
   };
 
   return (
-    <BrowserRouter>
-      <Routes>
-        {/* Route for the Home Page */}
-        <Route
-          exact
-          path="/"
-          element={
-            <Fragment>
-              <Navbar />
-              <div className="container">
-                <Alert alert={alert} />
-                <Search
-                  searchUsers={searchUsers}
-                  clearUsers={clearUsers}
-                  showClear={users.length > 0 ? true : false}
-                  displayAlert={displayAlert}
+    <GithubState>
+      <BrowserRouter>
+        <Routes>
+          {/* Route for the Home Page */}
+          <Route
+            exact
+            path="/"
+            element={
+              <Fragment>
+                <Navbar />
+                <div className="container">
+                  <Alert alert={alert} />
+                  <Search
+                    searchUsers={searchUsers}
+                    clearUsers={clearUsers}
+                    showClear={users.length > 0 ? true : false}
+                    displayAlert={displayAlert}
+                  />
+                  <Users loading={loading} users={users} />
+                </div>
+              </Fragment>
+            }
+          />
+
+          {/* Route for the About Page */}
+          <Route
+            exact
+            path="/about"
+            element={
+              <Fragment>
+                <Navbar />
+                <About />
+              </Fragment>
+            }
+          />
+
+          {/* Route for the User Detail Page */}
+          <Route
+            exact
+            path="/user/:login"
+            element={
+              <Fragment>
+                <Navbar />
+                <User
+                  getUser={getUser}
+                  user={user}
+                  loading={loading}
+                  getUserRepos={getUserRepos}
+                  repos={repos}
                 />
-                <Users loading={loading} users={users} />
-              </div>
-            </Fragment>
-          }
-        />
-
-        {/* Route for the About Page */}
-        <Route
-          exact
-          path="/about"
-          element={
-            <Fragment>
-              <Navbar />
-              <About />
-            </Fragment>
-          }
-        />
-
-        {/* Route for the User Detail Page */}
-        <Route
-          exact
-          path="/user/:login"
-          element={
-            <Fragment>
-              <Navbar />
-              <User
-                getUser={getUser}
-                user={user}
-                loading={loading}
-                getUserRepos={getUserRepos}
-                repos={repos}
-              />
-            </Fragment>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+              </Fragment>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </GithubState>
   );
 };
 
